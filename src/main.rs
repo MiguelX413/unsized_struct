@@ -7,6 +7,14 @@ pub struct MyStructSlice {
 }
 
 impl MyStructSlice {
+    pub fn new_unchecked(slice: &[u8]) -> &Self {
+        unsafe { mem::transmute(slice) }
+    }
+
+    pub fn new_mut_unchecked(slice: &mut [u8]) -> &mut Self {
+        unsafe { mem::transmute(slice) }
+    }
+
     pub fn inc(&mut self) {
         self.contents.iter_mut().for_each(|f| *f += 1);
     }
