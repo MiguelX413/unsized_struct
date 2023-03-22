@@ -63,6 +63,14 @@ impl DerefMut for MyStruct {
     }
 }
 
+impl From<Box<MyStructSlice>> for MyStruct {
+    fn from(value: Box<MyStructSlice>) -> Self {
+        Self {
+            contents: Box::<[u8]>::from(value).into_vec(),
+        }
+    }
+}
+
 impl From<MyStruct> for Vec<u8> {
     fn from(value: MyStruct) -> Self {
         value.into_inner()
