@@ -26,6 +26,18 @@ impl From<Box<MyStructSlice>> for Box<[u8]> {
     }
 }
 
+impl From<&MyStructSlice> for &[u8] {
+    fn from(value: &MyStructSlice) -> Self {
+        unsafe { mem::transmute(value) }
+    }
+}
+
+impl From<&mut MyStructSlice> for &mut [u8] {
+    fn from(value: &mut MyStructSlice) -> Self {
+        unsafe { mem::transmute(value) }
+    }
+}
+
 #[derive(Clone, Debug, Eq, PartialEq)]
 pub struct MyStruct {
     contents: Vec<u8>,
