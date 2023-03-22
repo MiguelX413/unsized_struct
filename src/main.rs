@@ -7,7 +7,7 @@ pub struct MyStructSlice {
 }
 
 impl MyStructSlice {
-    pub fn new_unchecked(slice: &[u8]) -> &Self {
+    pub const fn new_unchecked(slice: &[u8]) -> &Self {
         unsafe { mem::transmute(slice) }
     }
 
@@ -48,6 +48,10 @@ impl MyStruct {
         Self {
             contents: items.into_iter().collect(),
         }
+    }
+
+    pub const fn new_unchecked(vec: Vec<u8>) -> Self {
+        Self { contents: vec }
     }
 
     pub fn into_boxed_slice(self) -> Box<MyStructSlice> {
