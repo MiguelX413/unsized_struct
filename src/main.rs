@@ -38,8 +38,10 @@ impl MyStruct {
         }
     }
 
-    pub fn into_boxed_struct(self) -> Box<Self> {
-        unsafe { Box::from_raw(Box::into_raw(self.contents.into_boxed_slice()) as *mut Self) }
+    pub fn into_boxed_slice(self) -> Box<MyStructSlice> {
+        unsafe {
+            Box::from_raw(Box::into_raw(self.contents.into_boxed_slice()) as *mut MyStructSlice)
+        }
     }
 
     pub fn into_inner(self) -> Vec<u8> {
